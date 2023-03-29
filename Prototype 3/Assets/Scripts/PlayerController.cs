@@ -17,12 +17,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public bool isOnground = true;
+
+
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && isOnground)
         {
-            playerRb.AddForce(Vector3.up * jumpForce ForceMode.Impulse);
+            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isOnground = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        isOnground = true;
+    }
+ 
 }
